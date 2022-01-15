@@ -351,7 +351,7 @@ describe('08-conditions-n-loops-tasks', () => {
       5436468789016589,
       4916123456789012,
       371449635398430,
-      9112893456789010,
+      911289345678900,1
     ].forEach((ccn) => {
       assert(
         tasks.isCreditCardNumber(ccn) === false,

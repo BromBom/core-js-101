@@ -306,22 +306,20 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-/*  let s = 0;
+function isCreditCardNumber(ccn) {
+  const x = ccn.toString();
+  let s = 0;
   let doubleDigit = false;
-  for (let i = ccn.length - 1; i >= 0; i -= 1) {
-    let digit = +ccn[i];
+  for (let i = x.length - 1; i >= 0; i -= 1) {
+    let digit = +x[i];
     if (doubleDigit) {
       digit *= 2;
-      if (digit > 9) {
-        digit = 1 + (digit % 10);
-      }
+      if (digit > 9) digit -= 9;
     }
     s += digit;
     doubleDigit = !doubleDigit;
   }
-  return (s % 10 === 0); */
-  throw new Error('Not implemented');
+  return s % 10 === 0;
 }
 
 /**
