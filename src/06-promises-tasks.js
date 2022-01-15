@@ -102,9 +102,39 @@ function getFastestPromise(array) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
+function chainPromises(array, action) {
+  Promise.getAll = (promises) => {
+    const results = [];
+    return new Promise((resolve, reject) => {
+      promises.forEach((p, index) => {
+        p.then((result) => {
+          results.push(result);
+          if (index === promises.length - 1) {
+            resolve(results);
+          }
+        }).catch((err) => reject(err));
+      });
+    });
+  };
+
+  return Promise.getAll(array).then((values) => values.reduce(action));
 }
+/*
+  const responses = [];
+  const errorResp = [];
+  return new Promise((resolve, reject) => {
+    array.forEach(async (singlePromise) => {
+      try {
+        const res = await singlePromise;
+        responses.push(res);
+        resolve(responses);
+      } catch (err) {
+        errorResp.push(err);
+        reject(err);
+      }
+    });
+  }).then((results) => results.reduce(action)); */
+//  return array.filter((el) => el !== new Error()).reduce(action);
 
 module.exports = {
   willYouMarryMe,
